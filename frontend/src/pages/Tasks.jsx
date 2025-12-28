@@ -96,6 +96,31 @@ const Tasks = () => {
         }
     };
 
+    const handleEditTask = async (taskId, updates) => {
+        setUpdatingTaskId(taskId);
+        setError('');
+
+        try {
+            const response = await updateTask(taskId, updates);
+
+            if (response.success) {
+                setTasks((prevTasks) =>
+                    prevTasks.map((task) =>
+                        task.id === taskId ? { ...task, ...updates } : task
+                    )
+                );
+                return true;
+            }
+        } catch (err) {
+            setError('Failed to update task. Please try again.');
+            console.error('Error updating task:', err);
+        } finally {
+            setUpdatingTaskId(null);
+        }
+
+        return false;
+    };
+
     const handleDeleteTask = async (taskId) => {
         if (!window.confirm('Are you sure you want to delete this task?')) {
             return;
@@ -176,6 +201,7 @@ const Tasks = () => {
                                         key={task.id}
                                         task={task}
                                         onStatusChange={handleStatusChange}
+                                        onEdit={handleEditTask}
                                         onDelete={handleDeleteTask}
                                         isUpdating={updatingTaskId === task.id}
                                     />

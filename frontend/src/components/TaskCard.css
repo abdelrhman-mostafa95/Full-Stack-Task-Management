@@ -17,6 +17,11 @@
     pointer-events: none;
 }
 
+.task-card.editing {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
 .task-header {
     display: flex;
     justify-content: space-between;
@@ -77,6 +82,11 @@
     border-top: 1px solid #f3f4f6;
 }
 
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .status-select {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
@@ -93,6 +103,7 @@
     border-color: #6366f1;
 }
 
+.task-edit-btn,
 .task-delete-btn {
     display: flex;
     align-items: center;
@@ -100,12 +111,26 @@
     width: 36px;
     height: 36px;
     padding: 0;
-    background: #fef2f2;
-    border: 1px solid #fecaca;
     border-radius: 6px;
-    color: #ef4444;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.task-edit-btn {
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    color: #6366f1;
+}
+
+.task-edit-btn:hover:not(:disabled) {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+.task-delete-btn {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #ef4444;
 }
 
 .task-delete-btn:hover:not(:disabled) {
@@ -113,7 +138,84 @@
     color: #dc2626;
 }
 
+.task-edit-btn:disabled,
 .task-delete-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.edit-input,
+.edit-textarea {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+    outline: none;
+    font-family: inherit;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.edit-textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.edit-save-btn,
+.edit-cancel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-save-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+}
+
+.edit-save-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.edit-save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.edit-cancel-btn {
+    background: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid #e5e7eb;
+}
+
+.edit-cancel-btn:hover:not(:disabled) {
+    background: #e5e7eb;
+    color: #374151;
 }
